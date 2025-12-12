@@ -3,7 +3,7 @@ import openai
 
 # 최신 API 호출 코드
 response = openai.ChatCompletion.create(
-    model="gpt-4",  # 사용하려는 모델
+    model="gpt-5",  # 사용하려는 모델
     messages=[
         {"role": "system", "content": "You are a story generator."},
         {"role": "user", "content": "Your prompt here"}
