@@ -1,6 +1,16 @@
 import streamlit as st
 import openai
 
+# 최신 API 호출 코드
+response = openai.ChatCompletion.create(
+    model="gpt-4",  # 사용하려는 모델
+    messages=[
+        {"role": "system", "content": "You are a story generator."},
+        {"role": "user", "content": "Your prompt here"}
+    ],
+    max_tokens=500
+)
+
 # API 키 설정 (실제 API 키는 환경 변수나 다른 안전한 방법으로 관리하는 것이 좋습니다)
 openai.api_key = "your-openai-api-key"
 
