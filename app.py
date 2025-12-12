@@ -40,13 +40,17 @@ def generate_story(protagonist, theme, genre, world, sidekick):
     조연은 {sidekick}이며, 이들의 이야기를 바탕으로 소설을 생성해주세요.
     """
 
-    response = openai.Completion.create(
-        engine="gpt-4",
-        prompt=prompt,
+    # 최신 API 방식으로 수정
+    response = openai.ChatCompletion.create(
+        model="gpt-4",  # 최신 모델 명칭
+        messages=[
+            {"role": "system", "content": "You are a story generator."},
+            {"role": "user", "content": prompt}
+        ],
         max_tokens=500
     )
     
-    story = response.choices[0].text.strip()
+    story = response['choices'][0]['message']['content'].strip()
     return story
 
 def main():
@@ -59,8 +63,7 @@ def main():
             story = generate_story(protagonist, theme, genre, world, sidekick)
             st.subheader("생성된 소설:")
             st.write(story)
-        else:
-            st.error("모든 입력을 완료해주세요.")
 
 if __name__ == "__main__":
     main()
+
